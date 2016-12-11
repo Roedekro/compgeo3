@@ -1,0 +1,58 @@
+import java.util.ArrayList;
+
+
+public class SegmentTreeNode {
+
+	public SegmentTreeNode leftChild;
+	public SegmentTreeNode rightChild;
+	public ArrayList<Interval> entries;
+	public int a;
+	public int b;
+	
+	public SegmentTreeNode(int left, int right) {
+		a = left;
+		b = right;
+		leftChild = null;
+		rightChild = null;
+		entries = new ArrayList<Interval>();
+	}
+	
+	public void insert(Interval interval) {
+		// If the nodes interval is inside the interval of the Interval
+		// add the Interval to the node.
+		if(interval.a <= a && interval.b >= b){
+			entries.add(interval);
+		}
+		else {
+			
+			// Check to see if the Interval has a non-empty
+			// intersection with the left child
+			if((interval.a <= leftChild.a && interval.b >= leftChild.b) ||
+					(interval.a >= leftChild.a && interval.b <= leftChild.b)) {
+				leftChild.insert(interval);
+			}
+			
+			// Check to see if the Interval has a non-empty
+			// intersection with the right child
+			if((interval.a <= rightChild.a && interval.b >= rightChild.b) ||
+					(interval.a >= rightChild.a && interval.b <= rightChild.b)) {
+				rightChild.insert(interval);	
+			}
+		}	
+	}
+	
+	public ArrayList<Interval> report(int x) {
+		
+		ArrayList<Interval> ret = new ArrayList<Interval>();
+		if(x >= a && x <= b) {
+			ret.addAll(entries);
+			if(leftChild != null) {
+				ret.addAll(leftChild.report(x));
+			}
+			if(rightChild != null) {
+				ret.addAll(rightChild.report(x));
+			}
+		}
+		return ret;
+	}
+}
