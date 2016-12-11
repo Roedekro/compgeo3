@@ -28,6 +28,10 @@ public class SegmentTree {
 		}*/
 		
 		root = recursiveBuildLevel(level).get(0);
+		
+		for(int i = 0; i < intervals.size(); i++) {
+			root.insert(intervals.get(i));
+		}
 	}
 	
 	// Recursively build the segment tree in O(n) time.
