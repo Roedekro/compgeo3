@@ -14,6 +14,11 @@ public class Interval implements Comparable<Interval> {
 	@Override
 	public int compareTo(Interval o) {
 		// Compare by left coordinate, so we can sort them
-		return Integer.compare(a, o.a);
+		if(a != o.a) {
+			return Integer.compare(a, o.a);
+		}
+		else {
+			return Integer.compare(b, o.b);
+		}
 	}
 }
