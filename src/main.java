@@ -5,7 +5,7 @@ public class main {
 
 	public static void main(String[] args) {
 		
-		int x = 10;
+		int x = 8;
 		simpleTestSegmentTree(x);
 		System.out.println("-----------------------------------------");
 		simpleTestIntervalTree(x);
@@ -19,6 +19,8 @@ public class main {
 		array.add(new Interval(4,8,3));
 		array.add(new Interval(5,9,4));
 		array.add(new Interval(6,10,5));
+		
+		array.add(new Interval(5,6,6));
 		
 		//for(int i = 0; i < 5; i++)
 		
@@ -39,6 +41,7 @@ public class main {
 		array.add(new Interval(5,9,4));
 		array.add(new Interval(6,10,5));
 		
+		array.add(new Interval(5,6,6));
 		//for(int i = 0; i < 5; i++)
 		
 		IntervalTree tree = new IntervalTree(array);

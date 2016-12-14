@@ -20,23 +20,40 @@ public class SegmentTreeNode {
 	public void insert(Interval interval) {
 		// If the nodes interval is inside the interval of the Interval
 		// add the Interval to the node.
+		
+		System.out.println("Node a="+a+" b="+b);
+		System.out.println("Interval a="+interval.a +" b="+interval.b);
+		
 		if(interval.a <= a && interval.b >= b){
 			entries.add(interval);
+			System.out.println("Placed interval "+interval.a+","+interval.b+" in Node "
+					+ a+","+b);
 		}
 		else {
 			
 			// Check to see if the Interval has a non-empty
 			// intersection with the left child
-			if((interval.a <= leftChild.a && interval.b >= leftChild.b) ||
-					(interval.a >= leftChild.a && interval.b <= leftChild.b)) {
-				leftChild.insert(interval);
+			if(leftChild != null) {
+				if((interval.a <= leftChild.a && interval.b >= leftChild.b) ||
+						(interval.a >= leftChild.a && interval.b <= leftChild.b) ||
+						(interval.a >= leftChild.a && interval.a <= leftChild.b) ||
+						(interval.b >= leftChild.a && interval.b <= leftChild.b)) {
+					leftChild.insert(interval);
+				}
 			}
+			
+		
 			
 			// Check to see if the Interval has a non-empty
 			// intersection with the right child
-			if((interval.a <= rightChild.a && interval.b >= rightChild.b) ||
-					(interval.a >= rightChild.a && interval.b <= rightChild.b)) {
-				rightChild.insert(interval);	
+			
+			if(rightChild != null) {
+				if((interval.a <= rightChild.a && interval.b >= rightChild.b) ||
+						(interval.a >= rightChild.a && interval.b <= rightChild.b) ||
+						(interval.a >= rightChild.a && interval.a <= rightChild.b) ||
+						(interval.b >= rightChild.a && interval.b <= rightChild.b)) {
+					rightChild.insert(interval);	
+				}
 			}
 		}	
 	}
