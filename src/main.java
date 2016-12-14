@@ -5,7 +5,7 @@ public class main {
 
 	public static void main(String[] args) {
 		
-		int x = 8;
+		int x = 10;
 		simpleTestSegmentTree(x);
 		System.out.println("-----------------------------------------");
 		simpleTestIntervalTree(x);

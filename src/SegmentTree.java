@@ -35,9 +35,14 @@ public class SegmentTree {
 		}
 		Collections.sort(integers);
 		
-		for(int i = 0; i < integers.size(); i=i+2) {
+		/*for(int i = 0; i < integers.size(); i=i+2) {
 			level.add(new SegmentTreeNode(integers.get(i),integers.get(i+1)));
 			System.out.println("Added leaf: "+integers.get(i)+","+integers.get(i+1));
+		}*/
+		
+		for(int i = 0; i < integers.size(); i++) {
+			level.add(new SegmentTreeNode(integers.get(i),integers.get(i)));
+			System.out.println("Added leaf: "+integers.get(i)+","+integers.get(i));
 		}
 		
 		root = recursiveBuildLevel(level).get(0);

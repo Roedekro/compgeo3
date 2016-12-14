@@ -63,10 +63,10 @@ public class SegmentTreeNode {
 		ArrayList<Interval> ret = new ArrayList<Interval>();
 		if(x >= a && x <= b) {
 			ret.addAll(entries);
-			if(leftChild != null) {
+			if(leftChild != null && (x >= leftChild.a && x <= leftChild.b)) {
 				ret.addAll(leftChild.report(x));
 			}
-			if(rightChild != null) {
+			else if(rightChild != null && x >= rightChild.a && x <= rightChild.b) {
 				ret.addAll(rightChild.report(x));
 			}
 		}
