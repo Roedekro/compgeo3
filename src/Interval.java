@@ -3,11 +3,13 @@ public class Interval implements Comparable<Interval> {
 
 	public int a;
 	public int b;
+	public int y;
 	public int id;
 	
-	public Interval(int left, int right, int identity) {
+	public Interval(int left, int right, int y, int identity) {
 		a = left;
 		b = right;
+		this.y = y;
 		id = identity;
 	}
 

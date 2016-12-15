@@ -86,7 +86,7 @@ public class SegmentTree {
 		}
 	}
 	
-	public ArrayList<Interval> report(int x) {
-		return root.report(x);
+	public ArrayList<Interval> report(int x, int y1, int y2) {
+		return root.report(x,y1,y2);
 	}
 }
