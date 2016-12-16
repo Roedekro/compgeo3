@@ -9,8 +9,11 @@ public class IntervalReverseComparator implements Comparator<Interval>{
 		if(o1.b != o2.b) {
 			return (-1 * Integer.compare(o1.b, o2.b));
 		}
-		else {
+		else if(o1.a != o2.a){
 			return (-1 * Integer.compare(o1.a, o2.a));
+		}
+		else {
+			return (-1*Integer.compare(o1.id,o2.id));
 		}
 	}
 }

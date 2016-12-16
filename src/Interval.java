@@ -19,8 +19,11 @@ public class Interval implements Comparable<Interval> {
 		if(a != o.a) {
 			return Integer.compare(a, o.a);
 		}
-		else {
+		else if(b != o.b) {
 			return Integer.compare(b, o.b);
+		}
+		else {
+			return Integer.compare(id, o.id);
 		}
 	}
 }
