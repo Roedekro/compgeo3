@@ -11,7 +11,13 @@ public class IntervalTree {
 		root = new IntervalTreeNode(intervals);
 	}
 	
-	public ArrayList<Interval> query(int x) {
+	public ArrayList<Interval> query (int x, int y1, int y2) {
+		return root.query(x,y1,y2);		
+	}
+	
+	
+	
+	/*public ArrayList<Interval> query(int x) {
 		
 		ArrayList<Interval> ret = new ArrayList<Interval>();
 		IntervalTreeNode node = root;
@@ -52,5 +58,5 @@ public class IntervalTree {
 		}
 		
 		return ret;
-	}
+	}*/
 }

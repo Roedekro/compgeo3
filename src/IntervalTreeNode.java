@@ -6,8 +6,10 @@ public class IntervalTreeNode {
 
 	IntervalTreeNode leftChild;
 	IntervalTreeNode rightChild;
-	ArrayList<Interval> left;
-	ArrayList<Interval> right;
+	//ArrayList<Interval> left;
+	//ArrayList<Interval> right;
+	PrioritySearchTreeMax left;
+	PrioritySearchTreeMin right;
 	int mid;
 	
 	public IntervalTreeNode(ArrayList<Interval> intervals) {
@@ -43,7 +45,7 @@ public class IntervalTreeNode {
 			}
 		}
 		
-		// Sort by left endpoint
+		/*// Sort by left endpoint
 		Collections.sort(toThisNode);
 		left = toThisNode;
 		right = new ArrayList<Interval>();
@@ -51,7 +53,18 @@ public class IntervalTreeNode {
 			right.add(left.get(i));
 		}
 		// Sort by right endpoint
-		Collections.sort(right,new IntervalReverseComparator());
+		Collections.sort(right,new IntervalReverseComparator());*/
+		
+		if(toThisNode.size() > 0) {
+			System.out.println("Placing "+toThisNode.size()+" elements in node "+mid);
+			left = new PrioritySearchTreeMax(toThisNode);
+			right = new PrioritySearchTreeMin(toThisNode);
+			System.out.println("Node--------------------Node");
+		}
+		
+		
+		
+		
 		
 		if(toLeftChild.size() > 0) {
 			leftChild = new IntervalTreeNode(toLeftChild);
@@ -138,5 +151,34 @@ public class IntervalTreeNode {
 			// Recurse
 			return medianOfMedians(medians);
 		}
+	}
+	
+	public ArrayList<Interval> query (int x, int y1, int y2) {
+		ArrayList<Interval> ret = new ArrayList<Interval>();
+		
+		if(x < mid) {
+			// Lefttree
+			
+			if(left != null) {
+				ret.addAll(left.query(x,y1,y2));
+			}
+			
+			if(leftChild != null) {
+				ret.addAll(leftChild.query(x, y1, y2));
+			}
+		}
+		else {
+			// Righttree
+			
+			if(right != null) {
+				ret.addAll(right.query(x,y1,y2));
+			}
+			
+			if(rightChild != null) {
+				ret.addAll(rightChild.query(x, y1, y2));
+			}
+		}
+		
+		return ret;
 	}
 }

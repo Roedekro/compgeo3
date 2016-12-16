@@ -26,27 +26,26 @@ public class SegmentTreeNode {
 		// If the nodes interval is inside the interval of the Interval
 		// add the Interval to the node.
 		
-		System.out.println("Node a="+a+" b="+b);
-		System.out.println("Interval a="+interval.a +" b="+interval.b);
+		//System.out.println("Node a="+a+" b="+b);
+		//System.out.println("Interval a="+interval.a +" b="+interval.b);
 		
 		if(interval.a <= a && interval.b >= b){
 			counter++;
 			RBNode newNode = new RBNode(interval.y, interval, entries.nullNode);
 			// Find where to insert it in the linked list
 			if(counter > 1) {
-				System.out.println("Finding predecessor to "+interval.y);
+				//System.out.println("Finding predecessor to "+interval.y);
 				RBNode node = entries.predecessorOrEqual(interval.y);
 				if(node == null) {
-					System.out.println("Didnt find a predecessor");
-					System.out.println("Placing "+newNode.key+" to the left of "+
-					leftmostInList.key);
+					//System.out.println("Didnt find a predecessor");
+					//System.out.println("Placing "+newNode.key+" to the left of "+leftmostInList.key);
 					// New leftmost
 					leftmostInList.left = newNode;
 					newNode.right = leftmostInList;
 					leftmostInList = newNode;
 				}
 				else {
-					System.out.println("Found predecessor "+node.key);
+					//System.out.println("Found predecessor "+node.key);
 					newNode.left = node;
 					RBNode right = node.right;
 					node.right = newNode;
@@ -59,8 +58,8 @@ public class SegmentTreeNode {
 			else {
 				leftmostInList = newNode;
 			}
-			System.out.println("Placed interval "+interval.a+","+interval.b+","+interval.y+" in Node "
-					+ a+","+b);
+			//System.out.println("Placed interval "+interval.a+","+interval.b+","+interval.y+" in Node "
+					//+ a+","+b);
 			entries.insert(newNode);
 			if(newNode.key > largestYStored) {
 				largestYStored = newNode.key;
@@ -100,21 +99,21 @@ public class SegmentTreeNode {
 		ArrayList<Interval> ret = new ArrayList<Interval>();
 		if(x >= a && x <= b) {
 			if(counter > 0 && y1 <= largestYStored) {
-				System.out.println("Reporting in node: "+a+","+b);
+				//System.out.println("Reporting in node: "+a+","+b);
 				RBNode node = entries.predecessorOrEqual(y1);
 				if(node == null) {
-					System.out.println("Found Node: NULL");
+					//System.out.println("Found Node: NULL");
 					node = leftmostInList;
 				} else {
-					System.out.println("Found Node: "+node.key);
+					//System.out.println("Found Node: "+node.key);
 				}
 				if(node.key >= y1 && node.key <= y2) {
 					ret.add(node.value);
-					System.out.println("Adding interval: "+node.value.id);
+					//System.out.println("Adding interval: "+node.value.id);
 				}
 				node = node.right;
 				while(node != null && node.key <= y2) {
-					System.out.println("Adding interval: "+node.value.id);
+					//System.out.println("Adding interval: "+node.value.id);
 					ret.add(node.value);
 					node = node.right;
 				}
