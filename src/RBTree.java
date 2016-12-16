@@ -46,11 +46,11 @@ public class RBTree {
 	
 	public void insertFixup(RBNode z) {
 		
-		System.out.println("Fixup: "+z.key);
+		//System.out.println("Fixup: "+z.key);
 		
 		while (z.parent.color == 0) {
-			System.out.println("Fixup: z="+z.key);
-			System.out.println("Parent: "+z.parent.key);
+			//System.out.println("Fixup: z="+z.key);
+			//System.out.println("Parent: "+z.parent.key);
 			if(z.parent == z.parent.parent.leftChild) {
 				RBNode y = z.parent.parent.rightChild;
 				if(y.color == 0) {
@@ -145,13 +145,13 @@ public class RBTree {
 		}
 		else {
 			
-			System.out.println("Found larger parent "+node.key);
+			//System.out.println("Found larger parent "+node.key);
 			
 			// We found a parent greater than y.
 			// If parent has a left child, then the predecessor
 			// lies to the outer right in that subtree.
 			if(node.leftChild != nullNode) {
-				System.out.println("Searching Left Subtree");
+				//System.out.println("Searching Left Subtree");
 				node = node.leftChild;
 				while(node.rightChild != nullNode) {
 					node = node.rightChild;
@@ -185,10 +185,10 @@ public class RBTree {
 	// Finds y or parent
 	public RBNode find(int y) {
 		
-		System.out.println("Finding: "+y);
+		//System.out.println("Finding: "+y);
 		RBNode node = root;
 		while(node.key != y) {
-			System.out.println("Node: "+node.key);
+			//System.out.println("Node: "+node.key);
 			if(y < node.key) {
 				// Check left
 				if(node.leftChild != nullNode) {

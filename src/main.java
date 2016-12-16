@@ -7,10 +7,10 @@ public class main {
 		
 		int x = 6;
 		int y1 = 2;
-		int y2 = 7;
+		int y2 = 4;
 		simpleTestSegmentTree(x,y1,y2);
 		System.out.println("-----------------------------------------");
-		simpleTestIntervalTree(x);
+		simpleTestIntervalTree(x,y1,y2);
 	}
 	
 	public static void simpleTestSegmentTree(int x, int y1, int y2) {
@@ -36,7 +36,7 @@ public class main {
 		}
 	}
 	
-	public static void simpleTestIntervalTree(int x) {
+	public static void simpleTestIntervalTree(int x, int y1, int y2) {
 		
 		ArrayList<Interval> array = new ArrayList<Interval>();
 		array.add(new Interval(1,2,1,1));
@@ -50,7 +50,7 @@ public class main {
 		
 		IntervalTree tree = new IntervalTree(array);
 		
-		ArrayList<Interval> ret = tree.query(x);
+		ArrayList<Interval> ret = tree.query(x,y1,y2);
 		for(int i = 0; i < ret.size(); i++) {
 			System.out.println(ret.get(i).id);
 		}
