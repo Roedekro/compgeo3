@@ -3,14 +3,15 @@ public class KDTreeNode {
     public Point point;
     public KDTreeNode leftChild;
     public KDTreeNode rightChild;
-    public Integer line;
+    public Range region;
 
-    public KDTreeNode(Point point) {
+    public KDTreeNode(Range region, Point point) {
+        this.region = region;
         this.point = point;
     }
 
-    public KDTreeNode(int line, KDTreeNode leftChild, KDTreeNode rightChild) {
-        this.line = line;
+    public KDTreeNode(Range region, KDTreeNode leftChild, KDTreeNode rightChild) {
+        this.region = region;
         this.leftChild = leftChild;
         this.rightChild = rightChild;
     }
