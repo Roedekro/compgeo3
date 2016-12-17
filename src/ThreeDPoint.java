@@ -1,11 +1,14 @@
 
 public class ThreeDPoint {
 
-	int x,y,z;
+	int x,y,z,id;
+	Interval interval;
 	
-	public ThreeDPoint(int x, int y, int z) {
-		this.x = x;
-		this.y = y;
-		this.z = z;
+	public ThreeDPoint(Interval i) {
+		interval = i;
+		x = i.a;
+		y = i.b;
+		z = i.y;
+		id = i.id;
 	}
 }

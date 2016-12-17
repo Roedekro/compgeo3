@@ -19,14 +19,14 @@ public class PrioritySearchTreeMin {
 			}
 		}
 		
-		System.out.println("Found pmin="+pmin.a+","+pmin.b+","+pmin.y);
+		//System.out.println("Found pmin="+pmin.a+","+pmin.b+","+pmin.y);
 		
 		// Make array of y-coordinates
 		ArrayList<Integer> ycoordinates = new ArrayList<Integer>();
 		for(int i = 0; i < intervals.size(); i++) {
-			if(intervals.get(i) != pmin) {
+			if(intervals.get(i).id != pmin.id) {
 				ycoordinates.add(intervals.get(i).y);
-				System.out.println("Added "+ intervals.get(i).y);
+				//System.out.println("Added "+ intervals.get(i).y);
 			}
 		}
 		if(ycoordinates.size() > 0) {
@@ -36,13 +36,13 @@ public class PrioritySearchTreeMin {
 			}
 			ymedian = medianSelection(ycoordinates, goal);
 			
-			System.out.println("Ymedian="+ymedian);
+			//System.out.println("Ymedian="+ymedian);
 			
 			ArrayList<Interval> toLeft = new ArrayList<Interval>();
 			ArrayList<Interval> toRight = new ArrayList<Interval>();
 			for(int i = 0; i < intervals.size(); i++) {
 				Interval interval = intervals.get(i);
-				if(interval == pmin) {
+				if(interval.id == pmin.id) {
 					// Nothing
 				}
 				else if(interval.y < ymedian) {
@@ -62,22 +62,30 @@ public class PrioritySearchTreeMin {
 		else {
 			ymedian = pmin.y;
 		}
-		System.out.println("MinTree "+pmin.b+" with ymedian="+ymedian);
+		//System.out.println("MinTree "+pmin.b+" with ymedian="+ymedian);
 		
 		
 	}
 	
 	public ArrayList<Interval> query(int x, int y1, int y2) {
+		//System.out.println("Min: Active Node is "+pmin.a+","+pmin.b+","+pmin.y+" with median="+ymedian);
 		ArrayList<Interval> ret = new ArrayList<Interval>();
 		if(pmin.a <= x && x <= pmin.b && pmin.y >= y1 && pmin.y <= y2) {
 			ret.add(pmin);
+			//System.out.println("Min: Added "+pmin.a+","+pmin.b+","+pmin.y);
 		}
 		
 		// Find out if this is vsplit or not
 		boolean split = false;
-		if(!(y1 < ymedian && y2 < ymedian) || !(y1 >= ymedian && y2 >= ymedian)) {
+		/*if(!(y1 < ymedian && y2 < ymedian) || !(y1 >= ymedian && y2 >= ymedian)) {
+			split = true;
+		}*/
+		if(y1 <= ymedian && ymedian <= y2) {
 			split = true;
 		}
+		
+		//System.out.println("isSplit="+split);
+		//System.out.println("Min: Finished in Node "+pmin.a+","+pmin.b+","+pmin.y+" with median="+ymedian);
 		
 		if(split) {
 			if(left != null) {
@@ -99,10 +107,13 @@ public class PrioritySearchTreeMin {
 				}
 			}
 		}
+		
 		return ret;
 	}
 	
 	public ArrayList<Interval> queryAfterSplit(int x, int y, boolean leftY) {
+		//System.out.println("Min: QueryAfterSplit in Node "+pmin.a+","+pmin.b+","+pmin.y+" with median="+ymedian);
+		//System.out.println("x="+x+" y="+y+" leftY="+leftY);
 		ArrayList<Interval> ret = new ArrayList<Interval>();
 		boolean add = false;
 		if(leftY && pmin.y >= y) {
@@ -114,6 +125,8 @@ public class PrioritySearchTreeMin {
 		
 		if(pmin.a <= x && x <= pmin.b && add) {
 			ret.add(pmin);
+			//System.out.println("Added Min "+pmin.id);
+			//System.out.println(pmin.y+","+y+","+leftY+","+add);
 		}
 		
 		if(leftY) {
@@ -155,6 +168,7 @@ public class PrioritySearchTreeMin {
 		ArrayList<Interval> ret = new ArrayList<Interval>();
 		if(pmin.b <= x) {
 			ret.add(pmin);
+			//System.out.println("Added Min "+pmin.id);
 			if(left != null) {
 				ret.addAll(left.reportInSubTree(x));
 			}

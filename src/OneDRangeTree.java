@@ -38,4 +38,17 @@ public class OneDRangeTree {
 		}
 	}
 	
+	public ArrayList<ThreeDPoint> report() {
+		
+		ArrayList<ThreeDPoint> ret = new ArrayList<ThreeDPoint>();
+		ret.add(point);
+		if(left != null) {
+			ret.addAll(left.report());
+		}
+		if(right != null) {
+			ret.addAll(right.report());
+		}
+		return ret;
+	}
+	
 }

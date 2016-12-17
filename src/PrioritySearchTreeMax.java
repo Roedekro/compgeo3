@@ -24,7 +24,7 @@ public class PrioritySearchTreeMax {
 		// Make array of y-coordinates
 		ArrayList<Integer> ycoordinates = new ArrayList<Integer>();
 		for(int i = 0; i < intervals.size(); i++) {
-			if(intervals.get(i) != pmax) {
+			if(intervals.get(i).id != pmax.id) {
 				ycoordinates.add(intervals.get(i).y);
 				//System.out.println("Added "+intervals.get(i).y);
 			}
@@ -41,7 +41,7 @@ public class PrioritySearchTreeMax {
 			ArrayList<Interval> toRight = new ArrayList<Interval>();
 			for(int i = 0; i < intervals.size(); i++) {
 				Interval interval = intervals.get(i);
-				if(interval == pmax) {
+				if(interval.id == pmax.id) {
 					// Nothing
 				}
 				else if(interval.y < ymedian) {
@@ -73,7 +73,10 @@ public class PrioritySearchTreeMax {
 		
 		// Find out if this is vsplit or not
 		boolean split = false;
-		if(!(y1 < ymedian && y2 < ymedian) || !(y1 >= ymedian && y2 >= ymedian)) {
+		/*if(!(y1 < ymedian && y2 < ymedian) || !(y1 >= ymedian && y2 >= ymedian)) {
+			split = true;
+		}*/
+		if(y1 <= ymedian && ymedian <= y2) {
 			split = true;
 		}
 		
@@ -112,6 +115,7 @@ public class PrioritySearchTreeMax {
 		
 		if(pmax.a <= x && x <= pmax.b && add) {
 			ret.add(pmax);
+			System.out.println("Added Max "+pmax.id);
 		}
 		
 		if(leftY) {
@@ -151,8 +155,9 @@ public class PrioritySearchTreeMax {
 	
 	public ArrayList<Interval> reportInSubTree(int x) {
 		ArrayList<Interval> ret = new ArrayList<Interval>();
-		if(pmax.a <= x) {
+		if(pmax.a >= x) {
 			ret.add(pmax);
+			//System.out.println("Added Max "+pmax.id);
 			if(left != null) {
 				ret.addAll(left.reportInSubTree(x));
 			}

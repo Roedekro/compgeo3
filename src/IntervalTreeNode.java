@@ -56,10 +56,10 @@ public class IntervalTreeNode {
 		Collections.sort(right,new IntervalReverseComparator());*/
 		
 		if(toThisNode.size() > 0) {
-			System.out.println("Placing "+toThisNode.size()+" elements in node "+mid);
+			//System.out.println("Placing "+toThisNode.size()+" elements in node "+mid);
 			left = new PrioritySearchTreeMax(toThisNode);
 			right = new PrioritySearchTreeMin(toThisNode);
-			System.out.println("Node--------------------Node");
+			//System.out.println("Node--------------------Node");
 		}
 		
 		
@@ -171,7 +171,9 @@ public class IntervalTreeNode {
 			// Righttree
 			
 			if(right != null) {
+				//System.out.println("Query Right/min in "+mid);
 				ret.addAll(right.query(x,y1,y2));
+				//System.out.println("Query Done in "+mid);
 			}
 			
 			if(rightChild != null) {
