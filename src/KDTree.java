@@ -115,54 +115,111 @@ public class KDTree {
         }
 
         public Pair splitByXMedian(int median) {
-            List<Point> leftPointsX = pointsX.subList(0, median+1);
-            List<Point> rightPointsX = pointsX.subList(median+1, pointsX.size());
+            Point medianPoint = pointsX.get(median);
 
-            List<Point> leftPointsY = new ArrayList<>(pointsY);
-            leftPointsY.removeAll(rightPointsX);
-            List<Point> rightPointsY = new ArrayList<>(pointsY);
-            rightPointsY.removeAll(leftPointsX);
+            List<Point> leftPointsX = new ArrayList<>();
+            List<Point> rightPointsX = new ArrayList<>();
+            for (Point p : pointsX) {
+                if (p.x <= medianPoint.x) {
+                    leftPointsX.add(p);
+                } else {
+                    rightPointsX.add(p);
+                }
+            }
 
-            List<Point> leftPointsZ = new ArrayList<>(pointsZ);
-            leftPointsZ.removeAll(rightPointsX);
-            List<Point> rightPointsZ = new ArrayList<>(pointsZ);
-            rightPointsZ.removeAll(leftPointsX);
+            List<Point> leftPointsY = new ArrayList<>();
+            List<Point> rightPointsY = new ArrayList<>();
+            for (Point p : pointsY) {
+                if (p.x <= medianPoint.x) {
+                    leftPointsY.add(p);
+                } else {
+                    rightPointsY.add(p);
+                }
+            }
+
+            List<Point> leftPointsZ = new ArrayList<>();
+            List<Point> rightPointsZ = new ArrayList<>();
+            for (Point p : pointsZ) {
+                if (p.x <= medianPoint.x) {
+                    leftPointsZ.add(p);
+                } else {
+                    rightPointsZ.add(p);
+                }
+            }
 
             return new Pair(new PointCollection(leftPointsX, leftPointsY, leftPointsZ),
                     new PointCollection(rightPointsX, rightPointsY, rightPointsZ));
         }
 
         public Pair splitByYMedian(int median) {
-            List<Point> leftPointsY = pointsY.subList(0, median+1);
-            List<Point> rightPointsY = pointsY.subList(median+1, pointsY.size());
+            Point medianPoint = pointsY.get(median);
 
-            List<Point> leftPointsX = new ArrayList<>(pointsX);
-            leftPointsX.removeAll(rightPointsY);
-            List<Point> rightPointsX = new ArrayList<>(pointsX);
-            rightPointsX.removeAll(leftPointsY);
+            List<Point> leftPointsY = new ArrayList<>();
+            List<Point> rightPointsY = new ArrayList<>();
+            for (Point p : pointsY) {
+                if (p.y <= medianPoint.y) {
+                    leftPointsY.add(p);
+                } else {
+                    rightPointsY.add(p);
+                }
+            }
 
-            List<Point> leftPointsZ = new ArrayList<>(pointsZ);
-            leftPointsZ.removeAll(rightPointsY);
-            List<Point> rightPointsZ = new ArrayList<>(pointsZ);
-            rightPointsZ.removeAll(leftPointsY);
+            List<Point> leftPointsX = new ArrayList<>();
+            List<Point> rightPointsX = new ArrayList<>();
+            for (Point p : pointsX) {
+                if (p.y <= medianPoint.y) {
+                    leftPointsX.add(p);
+                } else {
+                    rightPointsX.add(p);
+                }
+            }
+
+            List<Point> leftPointsZ = new ArrayList<>();
+            List<Point> rightPointsZ = new ArrayList<>();
+            for (Point p : pointsZ) {
+                if (p.y <= medianPoint.y) {
+                    leftPointsZ.add(p);
+                } else {
+                    rightPointsZ.add(p);
+                }
+            }
 
             return new Pair(new PointCollection(leftPointsX, leftPointsY, leftPointsZ),
                     new PointCollection(rightPointsX, rightPointsY, rightPointsZ));
         }
 
         public Pair splitByZMedian(int median) {
-            List<Point> leftPointsZ = pointsZ.subList(0, median+1);
-            List<Point> rightPointsZ = pointsZ.subList(median+1, pointsZ.size());
+            Point medianPoint = pointsZ.get(median);
 
-            List<Point> leftPointsX = new ArrayList<>(pointsX);
-            leftPointsX.removeAll(rightPointsZ);
-            List<Point> rightPointsX = new ArrayList<>(pointsX);
-            rightPointsX.removeAll(leftPointsZ);
+            List<Point> leftPointsZ = new ArrayList<>();
+            List<Point> rightPointsZ = new ArrayList<>();
+            for (Point p : pointsZ) {
+                if (p.z <= medianPoint.z) {
+                    leftPointsZ.add(p);
+                } else {
+                    rightPointsZ.add(p);
+                }
+            }
 
-            List<Point> leftPointsY = new ArrayList<>(pointsY);
-            leftPointsY.removeAll(rightPointsZ);
-            List<Point> rightPointsY = new ArrayList<>(pointsY);
-            rightPointsY.removeAll(leftPointsZ);
+            List<Point> leftPointsX = new ArrayList<>();
+            List<Point> rightPointsX = new ArrayList<>();
+            for (Point p : pointsX) {
+                if (p.z <= medianPoint.z) {
+                    leftPointsX.add(p);
+                } else {
+                    rightPointsX.add(p);
+                }
+            }
+
+            List<Point> leftPointsY = new ArrayList<>();
+            List<Point> rightPointsY = new ArrayList<>();
+            for (Point p : pointsY) {
+                if (p.z <= medianPoint.z) {
+                    leftPointsY.add(p);
+                } else {
+                    rightPointsY.add(p);
+                }
+            }
 
             return new Pair(new PointCollection(leftPointsX, leftPointsY, leftPointsZ),
                     new PointCollection(rightPointsX, rightPointsY, rightPointsZ));
