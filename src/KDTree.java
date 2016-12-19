@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class KDTree {
@@ -101,11 +102,14 @@ public class KDTree {
 
         public PointCollection(List<Point> points) {
             pointsX = new ArrayList<>(points);
-            pointsX.sort(new Point.XComparator());
+            //pointsX.sort(new Point.XComparator());
+            Collections.sort(pointsX,new Point.XComparator());
             pointsY = new ArrayList<>(points);
-            pointsY.sort(new Point.YComparator());
+            //pointsY.sort(new Point.YComparator());
+            Collections.sort(pointsY,new Point.YComparator());
             pointsZ = new ArrayList<>(points);
-            pointsZ.sort(new Point.ZComparator());
+            //pointsZ.sort(new Point.ZComparator());
+            Collections.sort(pointsZ,new Point.ZComparator());
         }
 
         private PointCollection(List<Point> pointsX, List<Point> pointsY, List<Point> pointsZ) {

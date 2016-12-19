@@ -94,7 +94,7 @@ public class SegmentTreeNode {
 		}	
 	}
 	
-	public ArrayList<Interval> report(int x, int y1, int y2) {
+	public ArrayList<Interval> query(int x, int y1, int y2) {
 		
 		ArrayList<Interval> ret = new ArrayList<Interval>();
 		if(x >= a && x <= b) {
@@ -120,10 +120,10 @@ public class SegmentTreeNode {
 			}
 			
 			if(leftChild != null && (x >= leftChild.a && x <= leftChild.b)) {
-				ret.addAll(leftChild.report(x,y1,y2));
+				ret.addAll(leftChild.query(x,y1,y2));
 			}
 			else if(rightChild != null && x >= rightChild.a && x <= rightChild.b) {
-				ret.addAll(rightChild.report(x,y1,y2));
+				ret.addAll(rightChild.query(x,y1,y2));
 			}
 		}
 		return ret;
