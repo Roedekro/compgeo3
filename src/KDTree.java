@@ -119,6 +119,9 @@ public class KDTree {
         }
 
         public Pair splitByXMedian(int median) {
+        	
+        	
+        	
             List<Point> leftPointsX = pointsX.subList(0, median+1);
             List<Point> rightPointsX = pointsX.subList(median+1, pointsX.size());
 

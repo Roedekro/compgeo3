@@ -144,8 +144,8 @@ public class TwoDRangeTree {
 			// one following y2 down the tree.
 			OneDRangeTree followy1 = vSplit.left;
 			boolean b1 = true;
-			if(followy1 != null && b1) {
-				while(followy1.left != null || followy1.right != null) {
+			if(followy1 != null) {
+				while(b1 && (followy1.left != null || followy1.right != null)) {
 					boolean goLeft = false;
 					if(y1 <= followy1.point.z) {
 						goLeft = true;
@@ -175,8 +175,8 @@ public class TwoDRangeTree {
 			// Follow y2
 			OneDRangeTree followy2 = vSplit.left;
 			boolean b2 = true;
-			if(followy2 != null && b2) {
-				while(followy2.left != null || followy2.right != null) {
+			if(followy2 != null) {
+				while(b2 && (followy2.left != null || followy2.right != null)) {
 					boolean goLeft = false;
 					if(y2 <= followy2.point.z) {
 						goLeft = true;

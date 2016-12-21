@@ -185,7 +185,7 @@ public class PrioritySearchTreeMin {
 		if(list.size() == 1) {
 			return list.get(0);
 		}
-		else if(list.size() <= 5) {
+		else if(list.size() <= 32) {
 			// List is short enough to just sort, using any sort
 			Collections.sort(list);
 			return list.get(goal-1);
@@ -222,7 +222,7 @@ public class PrioritySearchTreeMin {
 	
 	public int medianOfMedians(ArrayList<Integer> list) {
 		
-		if(list.size() <= 5) {
+		if(list.size() <= 32) {
 			Collections.sort(list);
 			int i = list.size() / 2;
 			if(list.size() % 2 != 0) {
@@ -244,14 +244,14 @@ public class PrioritySearchTreeMin {
 					temp = new ArrayList<Integer>();
 					j = 0;
 				}
-				else if(i == list.size()-1) {
+				/*else if(i == list.size()-1) {
 					Collections.sort(temp);
 					int x = temp.size() / 2;
 					if(temp.size() % 2 != 0) {
 						x++;
 					}
-					medians.add(temp.get(x));
-				}
+					medians.add(temp.get(x-1));
+				}*/
 			}
 			
 			// Recurse

@@ -13,7 +13,7 @@ public class KDTreeTestSimple {
         points.add(new Point(6,10,5));
         points.add(new Point(5,6,6));
         KDTreeNode root = KDTree.buildKDTree(points);
-        Range range = new Range(0,8,8,0,4,6);
+        Range range = new Range(0,8,8,10,4,6);
         List<Point> search = KDTree.searchKDTree(root, range);
         for(int i = 0; i < search.size(); i++) {
         	System.out.println(search.get(i).z);

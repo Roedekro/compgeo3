@@ -115,7 +115,7 @@ public class PrioritySearchTreeMax {
 		
 		if(pmax.a <= x && x <= pmax.b && add) {
 			ret.add(pmax);
-			System.out.println("Added Max "+pmax.id);
+			//System.out.println("Added Max "+pmax.id);
 		}
 		
 		if(leftY) {
@@ -175,7 +175,7 @@ public class PrioritySearchTreeMax {
 		if(list.size() == 1) {
 			return list.get(0);
 		}
-		else if(list.size() <= 5) {
+		else if(list.size() <= 32) {
 			// List is short enough to just sort, using any sort
 			//System.out.println("Size="+list.size() + " goal="+goal);
 			Collections.sort(list);
@@ -202,6 +202,19 @@ public class PrioritySearchTreeMax {
 			}
 			else {
 				if(goal < left.size()) {
+					/*System.out.println("-----");
+					System.out.println(left.size());
+					System.out.println(median);
+					if(left.size() > 5) {
+						System.out.println("---");
+						System.out.println(left.get(0));
+						System.out.println(left.get(1));
+						System.out.println(left.get(2));
+						System.out.println(left.get(3));
+						System.out.println(left.get(4));
+						System.out.println(left.get(5));
+					}
+					System.out.println("-----");*/
 					return medianSelection(left,goal);
 				}
 				else {
@@ -213,13 +226,13 @@ public class PrioritySearchTreeMax {
 	
 	public int medianOfMedians(ArrayList<Integer> list) {
 		
-		if(list.size() <= 5) {
+		if(list.size() <= 32) {
 			Collections.sort(list);
-			int i = list.size() / 2;
+			int item = list.size() / 2;
 			if(list.size() % 2 != 0) {
-				i++;
+				item = item+1;
 			}
-			return(list.get(i-1));
+			return(list.get(item-1));
 		}
 		else {
 			ArrayList<Integer> medians = new ArrayList<Integer>();
@@ -231,18 +244,22 @@ public class PrioritySearchTreeMax {
 				j++;
 				if(j == 5) {
 					Collections.sort(temp);
-					medians.add(temp.get(2));
+					int x = temp.size() / 2;
+					if(temp.size() % 2 != 0) {
+						x++;
+					}
+					medians.add(temp.get(x-1));
 					temp = new ArrayList<Integer>();
 					j = 0;
 				}
-				else if(i == list.size()-1) {
+				/*else if(i == list.size()-1) {
 					Collections.sort(temp);
 					int x = temp.size() / 2;
 					if(temp.size() % 2 != 0) {
 						x++;
 					}
-					medians.add(temp.get(x));
-				}
+					medians.add(temp.get(x-1));
+				}*/
 			}
 			
 			// Recurse

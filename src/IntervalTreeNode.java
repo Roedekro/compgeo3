@@ -79,7 +79,7 @@ public class IntervalTreeNode {
 		if(list.size() == 1) {
 			return list.get(0);
 		}
-		else if(list.size() <= 5) {
+		else if(list.size() <= 32) {
 			// List is short enough to just sort, using any sort
 			Collections.sort(list);
 			return list.get(goal-1);
@@ -105,6 +105,7 @@ public class IntervalTreeNode {
 			}
 			else {
 				if(goal < left.size()) {
+					//System.out.println(left.size());
 					return medianSelection(left,goal);
 				}
 				else {
@@ -116,11 +117,11 @@ public class IntervalTreeNode {
 	
 	public int medianOfMedians(ArrayList<Integer> list) {
 		
-		if(list.size() <= 5) {
+		if(list.size() <= 32) {
 			Collections.sort(list);
 			int i = list.size() / 2;
 			if(list.size() % 2 != 0) {
-				i++;
+				i = i+1;
 			}
 			return(list.get(i-1));
 		}
@@ -144,7 +145,7 @@ public class IntervalTreeNode {
 					if(temp.size() % 2 != 0) {
 						x++;
 					}
-					medians.add(temp.get(x));
+					medians.add(temp.get(x-1));
 				}
 			}
 			
