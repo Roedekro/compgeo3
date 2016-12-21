@@ -23,15 +23,12 @@ public class KDTreeTest {
         for (int n = N_MIN; n <= N_MAX; n += N_GRANULARITY) {
             // Generate all n points
             System.out.println("Generating points for " + n + "/" + N_MAX);
+            List<Integer> xCords = randomUniqueList(n);
+            List<Integer> yCords = randomUniqueList(n);
+            List<Integer> zCords = randomUniqueList(n);
             List<Point> points = new ArrayList<>();
             for (int i = 0; i < n; i++) {
-                Point p = null;
-                while (p == null || points.contains(p)) {
-                    int x = random.nextInt(X_MAX - X_MIN) + X_MIN;
-                    int y = random.nextInt(Y_MAX - Y_MIN) + Y_MIN;
-                    int z = random.nextInt(Z_MAX - Z_MIN) + Z_MIN;
-                    p = new Point(x, y, z);
-                }
+                Point p = new Point(xCords.remove(0), yCords.remove(0), zCords.remove(0));
                 points.add(p);
             }
 
@@ -76,6 +73,17 @@ public class KDTreeTest {
             fw.write(entry.getKey() + "," + entry.getValue() + System.lineSeparator());
         }
         fw.close();
+    }
+
+    private static List<Integer> randomUniqueList(int n) {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+
+        for (int i = 0; i < n; i++) {
+            list.add(new Integer(i));
+        }
+
+        Collections.shuffle(list);
+        return list;
     }
 
 }

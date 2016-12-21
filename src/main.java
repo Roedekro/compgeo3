@@ -16,7 +16,7 @@ public class main {
 		System.out.println("-----------------------------------------");
 		SimpleTestRangeTree(x, y1, y2);*/
 		
-		test1(100000,1,10,5000,1,8000);
+		test1(1000,1,100,5000,1,8000);
 	}
 	
 	public static void test1(int n, int r, int k, int x, int y1, int y2) {
@@ -171,6 +171,7 @@ public class main {
 			System.out.println("Test 2: Starting run "+r);
 			
 			SegmentTree segtree = new SegmentTree(intervals);
+			System.out.println("Built Segment Tree");
 			tempSegmentCounter = System.currentTimeMillis();
 			for(int m = 0; m < k; m++ ) {
 				segtree.query(x,y1,y2);
@@ -180,6 +181,7 @@ public class main {
 			segmentCounter = segmentCounter + tempSegmentCounter;
 			
 			IntervalTree inttree = new IntervalTree(intervals);
+			System.out.println("Built Interval Tree");
 			tempIntervalCounter = System.currentTimeMillis();
 			for(int m = 0; m < k; m++ ) {
 				inttree.query(x, y1, y2);
@@ -189,6 +191,7 @@ public class main {
 			intervalCounter = intervalCounter + tempIntervalCounter;
 			
 			KDTreeNode kdroot = KDTree.buildKDTree(points1);
+			System.out.println("Built KD Tree");
 			Range range = new Range(0,x,x,n,y1,y2);
 			tempKdCounter = System.currentTimeMillis();
 			for(int m = 0; m < k; m++ ) {
@@ -199,6 +202,7 @@ public class main {
 			kdCounter = kdCounter + tempKdCounter;	
 			
 			ThreeDRangeTree rangetree = new ThreeDRangeTree(points2, points3, points4);
+			System.out.println("Built Range Tree");
 			tempRangeCounter = System.currentTimeMillis();
 			for(int m = 0; m < k; m++ ) {
 				rangetree.query(x, y1, y2);
