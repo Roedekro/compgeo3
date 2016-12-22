@@ -52,6 +52,7 @@ public class KDTree {
         KDTreeNode vLeft = null;
         KDTreeNode vRight = null;
         if(pair.left.pointsX.size() > 0) {
+        	//System.out.println(pair.left.pointsX.size());
         	vLeft = recurBuildKDTree(leftRange, pair.left, depth+1);
         }
         if(pair.right.pointsX.size() > 0) {
@@ -94,8 +95,14 @@ public class KDTree {
 
     public static List<Point> getLeafNodes(KDTreeNode node) {
         if (node.point != null) return new ArrayList<>(Arrays.asList(node.point));
-        List<Point> leftPoints = getLeafNodes(node.leftChild);
-        List<Point> rightPoints = getLeafNodes(node.rightChild);
+        List<Point> leftPoints = new ArrayList<>();
+        if(node.leftChild != null) {
+        	leftPoints = getLeafNodes(node.leftChild);
+        }
+        List<Point> rightPoints = new ArrayList<>();
+        if(node.rightChild != null) {
+        	rightPoints = getLeafNodes(node.rightChild);
+        }
         leftPoints.addAll(rightPoints);
         return leftPoints;
     }

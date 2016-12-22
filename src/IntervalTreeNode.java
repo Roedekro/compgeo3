@@ -8,8 +8,8 @@ public class IntervalTreeNode {
 	IntervalTreeNode rightChild;
 	//ArrayList<Interval> left;
 	//ArrayList<Interval> right;
-	PrioritySearchTreeMax left;
-	PrioritySearchTreeMin right;
+	PrioritySearchTreeMin left;
+	PrioritySearchTreeMax right;
 	int mid;
 	
 	public IntervalTreeNode(ArrayList<Interval> intervals) {
@@ -57,8 +57,8 @@ public class IntervalTreeNode {
 		
 		if(toThisNode.size() > 0) {
 			//System.out.println("Placing "+toThisNode.size()+" elements in node "+mid);
-			left = new PrioritySearchTreeMax(toThisNode);
-			right = new PrioritySearchTreeMin(toThisNode);
+			left = new PrioritySearchTreeMin(toThisNode);
+			right = new PrioritySearchTreeMax(toThisNode);
 			//System.out.println("Node--------------------Node");
 		}
 		
@@ -79,7 +79,7 @@ public class IntervalTreeNode {
 		if(list.size() == 1) {
 			return list.get(0);
 		}
-		else if(list.size() <= 32) {
+		else if(list.size() <= 64) {
 			// List is short enough to just sort, using any sort
 			Collections.sort(list);
 			return list.get(goal-1);
@@ -117,7 +117,7 @@ public class IntervalTreeNode {
 	
 	public int medianOfMedians(ArrayList<Integer> list) {
 		
-		if(list.size() <= 32) {
+		if(list.size() <= 64) {
 			Collections.sort(list);
 			int i = list.size() / 2;
 			if(list.size() % 2 != 0) {
@@ -173,6 +173,9 @@ public class IntervalTreeNode {
 			
 			if(right != null) {
 				//System.out.println("Query Right/min in "+mid);
+				//ArrayList<Interval> temp = right.query(x,y1,y2);
+				//System.out.println("Node "+mid+" size "+temp.size());
+				//ret.addAll(temp);
 				ret.addAll(right.query(x,y1,y2));
 				//System.out.println("Query Done in "+mid);
 			}
