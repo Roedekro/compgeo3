@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class IntervalTree {
+public class IntervalTree implements Serializable {
 
 	IntervalTreeNode root;
 	

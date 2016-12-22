@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class SegmentTreeNode {
+public class SegmentTreeNode implements Serializable {
 
 	public SegmentTreeNode leftChild;
 	public SegmentTreeNode rightChild;

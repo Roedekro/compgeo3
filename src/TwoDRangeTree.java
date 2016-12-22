@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class TwoDRangeTree {
+public class TwoDRangeTree implements Serializable {
 
 	ThreeDPoint point;
 	TwoDRangeTree left;

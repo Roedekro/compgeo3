@@ -1,4 +1,6 @@
-public class KDTreeNode {
+import java.io.Serializable;
+
+public class KDTreeNode implements Serializable {
 
     public Point point;
     public KDTreeNode leftChild;

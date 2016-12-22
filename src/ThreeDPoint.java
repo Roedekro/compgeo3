@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class ThreeDPoint {
+public class ThreeDPoint implements Serializable {
 
 	int x,y,z,id;
 	Interval interval;

@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class RBTree {
+public class RBTree implements Serializable {
 
 	public RBNode root;
 	public RBNode nullNode;

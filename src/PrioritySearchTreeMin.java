@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class PrioritySearchTreeMin {
+public class PrioritySearchTreeMin implements Serializable {
 	
 	Interval pmin;
 	int ymedian;

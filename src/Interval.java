@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Interval implements Comparable<Interval> {
+public class Interval implements Comparable<Interval>, Serializable {
 
 	public int a;
 	public int b;

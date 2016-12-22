@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class IntervalTreeNode {
+public class IntervalTreeNode implements Serializable {
 
 	IntervalTreeNode leftChild;
 	IntervalTreeNode rightChild;

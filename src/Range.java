@@ -1,4 +1,6 @@
-public class Range {
+import java.io.Serializable;
+
+public class Range implements Serializable {
 
     public int x1;
     public int x2;

@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class RBNode {
+public class RBNode implements Serializable {
 
 	public int key;
 	public Interval value;

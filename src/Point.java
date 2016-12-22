@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Comparator;
 
-public class Point {
+public class Point implements Serializable {
 
     public int x;
     public int y;
