@@ -11,11 +11,12 @@ public class PrioritySearchTreeMax implements Serializable {
 	PrioritySearchTreeMax right;
 
 	public PrioritySearchTreeMax(ArrayList<Interval> intervals) {
+
 		
 		pmax = null;
 		// Find pmax
 		for(int i = 0; i < intervals.size(); i++) {
-			if(pmax == null || intervals.get(i).a > pmax.a) {
+			if(pmax == null || intervals.get(i).b > pmax.b) {
 				pmax = intervals.get(i);
 			}
 		}
@@ -72,6 +73,10 @@ public class PrioritySearchTreeMax implements Serializable {
 			ret.add(pmax);
 		}
 		
+		if(pmax.b < x) {
+			return ret;
+		}
+		
 		// Find out if this is vsplit or not
 		boolean split = false;
 		/*if(!(y1 < ymedian && y2 < ymedian) || !(y1 >= ymedian && y2 >= ymedian)) {
@@ -82,6 +87,7 @@ public class PrioritySearchTreeMax implements Serializable {
 		}
 		
 		if(split) {
+			//System.out.println("Split");
 			if(left != null) {
 				ret.addAll(left.queryAfterSplit(x, y1,true));
 			}
@@ -90,6 +96,7 @@ public class PrioritySearchTreeMax implements Serializable {
 			}
 		}
 		else {
+			//System.out.println("Didnt Split");
 			if(y1 < ymedian) {
 				if(left != null) {
 					ret.addAll(left.query(x, y1, y2));
@@ -117,6 +124,10 @@ public class PrioritySearchTreeMax implements Serializable {
 		if(pmax.a <= x && x <= pmax.b && add) {
 			ret.add(pmax);
 			//System.out.println("Added Max "+pmax.id);
+		}
+		
+		if(pmax.b < x) {
+			return ret;
 		}
 		
 		if(leftY) {
@@ -156,7 +167,7 @@ public class PrioritySearchTreeMax implements Serializable {
 	
 	public ArrayList<Interval> reportInSubTree(int x) {
 		ArrayList<Interval> ret = new ArrayList<Interval>();
-		if(pmax.a >= x) {
+		if(pmax.b >= x) {
 			ret.add(pmax);
 			//System.out.println("Added Max "+pmax.id);
 			if(left != null) {
@@ -176,7 +187,7 @@ public class PrioritySearchTreeMax implements Serializable {
 		if(list.size() == 1) {
 			return list.get(0);
 		}
-		else if(list.size() <= 32) {
+		else if(list.size() <= 64) {
 			// List is short enough to just sort, using any sort
 			//System.out.println("Size="+list.size() + " goal="+goal);
 			Collections.sort(list);
@@ -227,7 +238,7 @@ public class PrioritySearchTreeMax implements Serializable {
 	
 	public int medianOfMedians(ArrayList<Integer> list) {
 		
-		if(list.size() <= 32) {
+		if(list.size() <= 64) {
 			Collections.sort(list);
 			int item = list.size() / 2;
 			if(list.size() % 2 != 0) {

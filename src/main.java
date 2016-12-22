@@ -16,7 +16,11 @@ public class main {
 		System.out.println("-----------------------------------------");
 		SimpleTestRangeTree(x, y1, y2);*/
 		
-		test1(1000,1,100,5000,1,8000);
+		int n = 1000;
+		int d = n/1000;
+		//test1(n,10,100,n/2,1,n); // 100%
+		test1(n,10,100,n/2,n/2-n/20,n/2+n/20); // 45%-55%
+		//test2(n,1,1,n,n,1,n);
 	}
 	
 	public static void test1(int n, int r, int k, int x, int y1, int y2) {
@@ -61,7 +65,7 @@ public class main {
 			long tempKdCounter = 0;
 			long tempRangeCounter =0;
 			
-			System.out.println("Test 1: Starting run "+r);
+			System.out.println("Test 1: Starting run "+i);
 			
 			SegmentTree segtree = new SegmentTree(intervals);
 			System.out.println("Built Segment Tree");
@@ -70,7 +74,7 @@ public class main {
 				segtree.query(x,y1,y2);
 			}
 			tempSegmentCounter =  System.currentTimeMillis() - tempSegmentCounter;
-			System.out.println("Run "+r+" Segment Tree took "+tempSegmentCounter);
+			System.out.println("Run "+i+" Segment Tree took "+tempSegmentCounter);
 			segmentCounter = segmentCounter + tempSegmentCounter;
 			
 			IntervalTree inttree = new IntervalTree(intervals);
@@ -80,7 +84,7 @@ public class main {
 				inttree.query(x, y1, y2);
 			}
 			tempIntervalCounter = System.currentTimeMillis() - tempIntervalCounter;
-			System.out.println("Run "+r+" Interval Tree took "+tempIntervalCounter);
+			System.out.println("Run "+i+" Interval Tree took "+tempIntervalCounter);
 			intervalCounter = intervalCounter + tempIntervalCounter;
 			
 			KDTreeNode kdroot = KDTree.buildKDTree(points1);
@@ -91,7 +95,7 @@ public class main {
 				KDTree.searchKDTree(kdroot, range);
 			}
 			tempKdCounter = System.currentTimeMillis() - tempKdCounter;
-			System.out.println("Run "+r+" KD Tree took "+tempKdCounter);
+			System.out.println("Run "+i+" KD Tree took "+tempKdCounter);
 			kdCounter = kdCounter + tempKdCounter;	
 			
 			ThreeDRangeTree rangetree = new ThreeDRangeTree(points2, points3, points4);
@@ -101,7 +105,7 @@ public class main {
 				rangetree.query(x, y1, y2);
 			}
 			tempRangeCounter = System.currentTimeMillis() - tempRangeCounter;
-			System.out.println("Run "+r+" Range Tree took "+tempRangeCounter);
+			System.out.println("Run "+i+" Range Tree took "+tempRangeCounter);
 			rangeCounter = rangeCounter + tempRangeCounter;
 		}
 
@@ -146,9 +150,6 @@ public class main {
 			for(int j = 0; j < n; j++) {
 				int a = rand.nextInt(n)+1;
 				int b = a + d;
-				if(b > n) {
-					b = n;
-				}
 				int y = rand.nextInt(n)+1;
 				Interval interval = new Interval(a,b,y,j);
 				intervals.add(interval);
@@ -168,7 +169,7 @@ public class main {
 			long tempKdCounter = 0;
 			long tempRangeCounter =0;
 			
-			System.out.println("Test 2: Starting run "+r);
+			System.out.println("Test 2: Starting run "+i);
 			
 			SegmentTree segtree = new SegmentTree(intervals);
 			System.out.println("Built Segment Tree");
@@ -177,7 +178,7 @@ public class main {
 				segtree.query(x,y1,y2);
 			}
 			tempSegmentCounter =  System.currentTimeMillis() - tempSegmentCounter;
-			System.out.println("Run "+r+" Segment Tree took "+tempSegmentCounter);
+			System.out.println("Run "+i+" Segment Tree took "+tempSegmentCounter);
 			segmentCounter = segmentCounter + tempSegmentCounter;
 			
 			IntervalTree inttree = new IntervalTree(intervals);
@@ -187,7 +188,7 @@ public class main {
 				inttree.query(x, y1, y2);
 			}
 			tempIntervalCounter = System.currentTimeMillis() - tempIntervalCounter;
-			System.out.println("Run "+r+" Interval Tree took "+tempIntervalCounter);
+			System.out.println("Run "+i+" Interval Tree took "+tempIntervalCounter);
 			intervalCounter = intervalCounter + tempIntervalCounter;
 			
 			KDTreeNode kdroot = KDTree.buildKDTree(points1);
@@ -198,7 +199,7 @@ public class main {
 				KDTree.searchKDTree(kdroot, range);
 			}
 			tempKdCounter = System.currentTimeMillis() - tempKdCounter;
-			System.out.println("Run "+r+" KD Tree took "+tempKdCounter);
+			System.out.println("Run "+i+" KD Tree took "+tempKdCounter);
 			kdCounter = kdCounter + tempKdCounter;	
 			
 			ThreeDRangeTree rangetree = new ThreeDRangeTree(points2, points3, points4);
@@ -208,7 +209,7 @@ public class main {
 				rangetree.query(x, y1, y2);
 			}
 			tempRangeCounter = System.currentTimeMillis() - tempRangeCounter;
-			System.out.println("Run "+r+" Range Tree took "+tempRangeCounter);
+			System.out.println("Run "+i+" Range Tree took "+tempRangeCounter);
 			rangeCounter = rangeCounter + tempRangeCounter;
 		}
 

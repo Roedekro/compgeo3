@@ -12,10 +12,11 @@ public class PrioritySearchTreeMin implements Serializable {
 
 	public PrioritySearchTreeMin(ArrayList<Interval> intervals) {
 		
+		
 		pmin = null;
 		// Find pmin
 		for(int i = 0; i < intervals.size(); i++) {
-			if(pmin == null || intervals.get(i).b < pmin.b) {
+			if(pmin == null || intervals.get(i).a < pmin.a) {
 				pmin = intervals.get(i);
 			}
 		}
@@ -53,6 +54,7 @@ public class PrioritySearchTreeMin implements Serializable {
 					toRight.add(interval);
 				}
 			}
+			//System.out.println(toLeft.size()+","+toRight.size());
 			if(toLeft.size() > 0) {
 				left = new PrioritySearchTreeMin(toLeft);
 			}
@@ -76,6 +78,10 @@ public class PrioritySearchTreeMin implements Serializable {
 			//System.out.println("Min: Added "+pmin.a+","+pmin.b+","+pmin.y);
 		}
 		
+		if(pmin.a > x) {
+			return ret;
+		}
+		
 		// Find out if this is vsplit or not
 		boolean split = false;
 		/*if(!(y1 < ymedian && y2 < ymedian) || !(y1 >= ymedian && y2 >= ymedian)) {
@@ -89,6 +95,7 @@ public class PrioritySearchTreeMin implements Serializable {
 		//System.out.println("Min: Finished in Node "+pmin.a+","+pmin.b+","+pmin.y+" with median="+ymedian);
 		
 		if(split) {
+			//System.out.println("Found Split");
 			if(left != null) {
 				ret.addAll(left.queryAfterSplit(x, y1,true));
 			}
@@ -113,6 +120,7 @@ public class PrioritySearchTreeMin implements Serializable {
 	}
 	
 	public ArrayList<Interval> queryAfterSplit(int x, int y, boolean leftY) {
+		//System.out.println("1");
 		//System.out.println("Min: QueryAfterSplit in Node "+pmin.a+","+pmin.b+","+pmin.y+" with median="+ymedian);
 		//System.out.println("x="+x+" y="+y+" leftY="+leftY);
 		ArrayList<Interval> ret = new ArrayList<Interval>();
@@ -130,12 +138,18 @@ public class PrioritySearchTreeMin implements Serializable {
 			//System.out.println(pmin.y+","+y+","+leftY+","+add);
 		}
 		
+		if(pmin.a > x) {
+			return ret;
+		}
+		
 		if(leftY) {
+			//System.out.println("2");
 			if(y < ymedian) {
 				if(left != null) {
 					ret.addAll(left.queryAfterSplit(x, y, leftY));
 				}
 				if(right != null) {
+					//System.out.println("A");
 					ret.addAll(right.reportInSubTree(x));
 				}
 			}
@@ -146,11 +160,13 @@ public class PrioritySearchTreeMin implements Serializable {
 			}	
 		} 
 		else {
+			//System.out.println("3");
 			if(y >= ymedian) {
 				if(right != null) {
 					ret.addAll(right.queryAfterSplit(x, y, leftY));
 				}
 				if(left != null) {
+					//System.out.println("B");
 					ret.addAll(left.reportInSubTree(x));
 				}
 			}
@@ -167,7 +183,8 @@ public class PrioritySearchTreeMin implements Serializable {
 	
 	public ArrayList<Interval> reportInSubTree(int x) {
 		ArrayList<Interval> ret = new ArrayList<Interval>();
-		if(pmin.b <= x) {
+		//System.out.println("C "+pmin.b+","+x);
+		if(pmin.a <= x) {
 			ret.add(pmin);
 			//System.out.println("Added Min "+pmin.id);
 			if(left != null) {
@@ -186,7 +203,7 @@ public class PrioritySearchTreeMin implements Serializable {
 		if(list.size() == 1) {
 			return list.get(0);
 		}
-		else if(list.size() <= 32) {
+		else if(list.size() <= 64) {
 			// List is short enough to just sort, using any sort
 			Collections.sort(list);
 			return list.get(goal-1);
@@ -223,7 +240,7 @@ public class PrioritySearchTreeMin implements Serializable {
 	
 	public int medianOfMedians(ArrayList<Integer> list) {
 		
-		if(list.size() <= 32) {
+		if(list.size() <= 64) {
 			Collections.sort(list);
 			int i = list.size() / 2;
 			if(list.size() % 2 != 0) {
